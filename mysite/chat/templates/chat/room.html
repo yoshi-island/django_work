@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <title>Chat Room</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
@@ -14,7 +14,7 @@
     <p><a href="{% url 'logout' %}">logout</a></p>
 
     <textarea readonly id="chat-log" cols="100" rows="20"></textarea><br/>
-    <label>Input user name -></label>
+    <label>Input user name to display -></label>
     <input id="chat-username-input" type-"text" size="30" /><br/>
     <label>Input message here -></label>
     <input id="chat-message-input" type="text" size="100"/><br/>
