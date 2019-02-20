@@ -5,12 +5,22 @@
     <title>Chat Room</title>
 </head>
 <body>
+{% block content %}
+{% if user.is_authenticated %}
+    Hi {{ user.username }}!
+    <p><a href="{% url 'logout' %}">logout</a></p>
+
     <textarea readonly id="chat-log" cols="100" rows="20"></textarea><br/>
     <label>Input user name -></label>
     <input id="chat-username-input" type-"text" size="30" /><br/>
     <label>Input message here -></label>
     <input id="chat-message-input" type="text" size="100"/><br/>
     <input id="chat-message-submit" type="button" value="Send"/>
+{% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">login</a>
+{% endif %}
+{% endblock %}
 </body>
 <script>
     var roomName = {{ room_name_json }};
