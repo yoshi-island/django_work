@@ -2,6 +2,8 @@
 {% if user.is_authenticated %}
   Hi {{ user.username }}!
   <p><a href="{% url 'logout' %}">logout</a></p>
+  <h2>Memu</h2>
+  <a href="{% url 'chat' %}">Chat-App</a>
 {% else %}
   <p>You are not logged in</p>
   <a href="{% url 'login' %}">login</a>
