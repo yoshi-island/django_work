@@ -16,6 +16,6 @@
   <p><strong>-- OR --</strong></p>
   <a href="{% url 'social:begin' 'github' %}?next={{ request.GET.next }}">Login with GitHub</a><br>
   <a href="{% url 'social:begin' 'twitter' %}?next={{ request.GET.next }}">Login with Twitter</a><br>
-{#  <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a> #}
+  <a href="{% url 'social:begin' 'facebook' %}?next={{ request.GET.next }}">Login with Facebook</a>
 {% endblock %}
 </body>
