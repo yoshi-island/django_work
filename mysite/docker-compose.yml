@@ -1,6 +1,25 @@
 version: '3'
 
 services:
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/letsencrypt/:/etc/letsencrypt/
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+    depends_on:
+      - daphne
+  daphne:
+    build: .
+    volumes:
+      - .:/code
+    command: bash -c "daphne -b 0.0.0.0 -p 8001 mysite.asgi:application"
+    ports:
+      - "8001:8001"
+    depends_on:
+      - redis
   db:
     image: postgres
   redis:
@@ -9,12 +28,11 @@ services:
       - "6379:6379"
   django:
     build: .
-    command: python manage.py runsslserver 0.0.0.0:8001 --certificate /etc/letsencrypt/live/www.yoshiislandserver.net/cert.pem --key /etc/letsencrypt/live/www.yoshiislandserver.net/privkey.pem
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
-      - /etc/letsencrypt/:/etc/letsencrypt/
     ports:
-      - "8001:8001"
+      - "8000:8000"
     depends_on:
       - db
       - redis
