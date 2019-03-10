@@ -28,5 +28,6 @@ urlpatterns = [
     url(r'^oauth/', include('social_django.urls', namespace='social')),
     url(r'^admin/', admin.site.urls),
     url(r'^chat/', include('chat.urls')),
+    url(r'^apps/', include('apps.urls')),
 ]
 

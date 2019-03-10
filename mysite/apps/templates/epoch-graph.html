@@ -1,0 +1,442 @@
+<html>
+  <head>
+    <title>EpochTest</title>
+    <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/epoch-charting@0.8.4/tests/render/css/tests.css">
+    <script src="https://cdn.jsdelivr.net/npm/epoch-charting@0.8.4/dist/js/epoch.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/epoch-charting@0.8.4/dist/css/epoch.min.css">
+
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+
+  </head>
+ 
+<style>
+body {font-family: helvetica; }
+/* Default test chart height of 220px. */
+.test .epoch {height: 220px; }
+.broken {color: red; }
+#testId .epoch .a .line { stroke: blue; }
+#testId .epoch .b .line { stroke: red; }
+#testId .epoch .c .line { stroke: green;  }
+</style>
+ 
+<body> 
+
+    <div>
+      <h2>Menu</h2>
+      <p><a href="https://www.yoshiislandserver.net">Back to Basepage</a></p>
+    </div>
+
+<div id="testId" class="test">
+
+  <h2>Epoch-graph</h2>
+
+    <p>
+    <div class="epoch"></div>
+    <button class="playback" style="width:200px; height="20px">Play</button>
+    </p>
+ 
+    <p>
+        <h3>Control</h3>
+        <button class="toggle" data-index="0">Blue</button> <button class="toggle" data-index="1">Red</button> <button class="toggle" data-index="2">Green</button> <br><br>
+    </p>
+ 
+    <p>
+        <h3>Index Number</h3>
+        index number: <label id="indexno">0</label>
+    </p>
+ 
+    <p>
+        <h3>Customize</h3>
+        <h4>Blue</h4>
+        <div style='border: 1px solid; padding:5px; display:inline-flex'>
+        Blue= index number
+        <form id='blue' style='display: inline-flex'>
+        <select id='blue1'>
+          <option value='1'>+</option>
+          <option value='2'>-</option>
+          <option value='3' selected>*</option>
+          <option value='4'>/</option>
+        </select>
+        <select id='blue2'>
+          <option value='1' selected>0</option>
+          <option value='2'>1</option>
+          <option value='3'>2</option>
+          <option value='4'>3</option>
+          <option value='5'>4</option>
+          <option value='6'>5</option>
+          <option value='7'>6</option>
+          <option value='8'>7</option>
+          <option value='9'>8</option>
+          <option value='10'>9</option>
+          <option value='11'>sin(index number)</option>
+          <option value='12'>cos(index number)</option>
+          <option value='13'>PI</option>
+          <option value='14'>random</option>
+        </select>
+        <select id='blue3'>
+          <option value='1' selected>+</option>
+          <option value='2'>-</option>
+          <option value='3'>*</option>
+          <option value='4'>/</option>
+        </select>
+        <select id='blue4'>
+          <option value='1'>0</option>
+          <option value='2' selected>1</option>
+          <option value='3'>2</option>
+          <option value='4'>3</option>
+          <option value='5'>4</option>
+          <option value='6'>5</option>
+          <option value='7'>6</option>
+          <option value='8'>7</option>
+          <option value='9'>8</option>
+          <option value='10'>9</option>
+          <option value='11'>sin(index number)</option>
+          <option value='12'>cos(index number)</option>
+          <option value='13'>PI</option>
+          <option value='14'>random</option>
+        </select>
+        </form>
+        </div>
+ 
+        <h4>Red</h4>
+        <div style="border: 1px solid; padding:5px; display:inline-flex">
+        Red= index number
+        <form id='red' style='display: inline-flex'>
+        <select id='red1'>
+          <option value='1'>+</option>
+          <option value='2'>-</option>
+          <option value='3' selected>*</option>
+          <option value='4'>/</option>
+        </select>
+        <select id='red2'>
+          <option value='1' selected>0</option>
+          <option value='2'>1</option>
+          <option value='3'>2</option>
+          <option value='4'>3</option>
+          <option value='5'>4</option>
+          <option value='6'>5</option>
+          <option value='7'>6</option>
+          <option value='8'>7</option>
+          <option value='9'>8</option>
+          <option value='10'>9</option>
+          <option value='11'>sin(index number)</option>
+          <option value='12'>cos(index number)</option>
+          <option value='13'>PI</option>
+          <option value='14'>random</option>
+        </select>
+        <select id='red3'>
+          <option value='1'>+</option>
+          <option value='2' selected>-</option>
+          <option value='3'>*</option>
+          <option value='4'>/</option>
+        </select>
+        <select id='red4'>
+          <option value='1'>0</option>
+          <option value='2'>1</option>
+          <option value='3'>2</option>
+          <option value='4'>3</option>
+          <option value='5'>4</option>
+          <option value='6'>5</option>
+          <option value='7'>6</option>
+          <option value='8'>7</option>
+          <option value='9'>8</option>
+          <option value='10'>9</option>
+          <option value='11' selected>sin(index number)</option>
+          <option value='12'>cos(index number)</option>
+          <option value='13'>PI</option>
+          <option value='14'>random</option>
+        </select>
+        </form>
+        </div>
+ 
+        <h4>Green</h4>
+        <div style="border: 1px solid; padding:5px; display:inline-flex">
+        Green= index number
+        <form id='green' style='display: inline-flex'>
+        <select id='green1'>
+          <option value='1'>+</option>
+          <option value='2'>-</option>
+          <option value='3' selected>*</option>
+          <option value='4'>/</option>
+        </select>
+        <select id='green2'>
+          <option value='1' selected>0</option>
+          <option value='2'>1</option>
+          <option value='3'>2</option>
+          <option value='4'>3</option>
+          <option value='5'>4</option>
+          <option value='6'>5</option>
+          <option value='7'>6</option>
+          <option value='8'>7</option>
+          <option value='9'>8</option>
+          <option value='10'>9</option>
+          <option value='11'>sin(index number)</option>
+          <option value='12'>cos(index number)</option>
+          <option value='13'>PI</option>
+          <option value='14'>random</option>
+        </select>
+        <select id='green3'>
+          <option value='1' selected>+</option>
+          <option value='2'>-</option>
+          <option value='3'>*</option>
+          <option value='4'>/</option>
+        </select>
+        <select id='green4'>
+          <option value='1'>0</option>
+          <option value='2'>1</option>
+          <option value='3'>2</option>
+          <option value='4'>3</option>
+          <option value='5'>4</option>
+          <option value='6'>5</option>
+          <option value='7'>6</option>
+          <option value='8'>7</option>
+          <option value='9'>8</option>
+          <option value='10'>9</option>
+          <option value='11'>sin(index number)</option>
+          <option value='12'>cos(index number)</option>
+          <option value='13'>PI</option>
+          <option value='14' selected>random</option>
+        </select>
+        </form>
+        </div>
+</div>
+ 
+ 
+ 
+<script>
+  var nextTime = (function() {
+    var currentTime = parseInt(new Date().getTime() / 1000);
+    return function() { return currentTime++; 
+  }})();
+</script>
+ 
+<script>
+$(function() {
+    var data = [
+            {label: 'A', values: []},
+            {label: 'B', values: []},
+            {label: 'C', values: []}
+        ],
+        length = 400,
+        nextIndex = length,
+        playing = false,
+        interval = null;
+    // default
+    for (var i = 0; i < length; i++) {
+        var x = i +1,
+            time = nextTime();
+        data[0].values.push({time: time, y: 0});
+        data[1].values.push({time: time, y: 0});
+        data[2].values.push({time: time, y: 0});
+    }
+ 
+    var chart = $('#testId .epoch').epoch({
+        type: 'time.line',
+        data: data,
+        axes: ['right', 'bottom']
+    });
+ 
+    var pushPoint = function() {
+        var x = nextIndex + 1,
+            time = nextTime();
+ 
+ 
+        // blue
+        var blue1 = document.getElementById('blue1'),
+            blue2 = document.getElementById('blue2'),
+            blue3 = document.getElementById('blue3'),
+            blue4 = document.getElementById('blue4');
+ 
+        if (blue2.value==11) {
+          var blue2val = Math.sin(x-length);
+        }else if (blue2.value==12) {
+          var blue2val = Math.cos(x-length);
+        }else if (blue2.value==13) {
+          var blue2val = Math.PI;
+        }else if (blue2.value==14) {
+          var blue2val = Math.random();
+        }else{
+          var blue2val = blue2.selectedIndex
+        };
+ 
+        if (blue1.value==1) {
+          var blueval1 = (x-length)+blue2val;
+        } else if (blue1.value==2) {
+          var blueval1 = (x-length)-blue2val;
+        } else if (blue1.value==3) {
+          var blueval1 = (x-length)*blue2val;
+        } else if (blue1.value==4) {
+          var blueval1 = (x-length)/blue2val;
+        }else{
+          var blueval1 = 0;
+        };
+ 
+        if (blue4.value==11) {
+          var blue4val = Math.sin(x-length);
+        }else if (blue4.value==12) {
+          var blue4val = Math.cos(x-length);
+        }else if (blue4.value==13) {
+          var blue4val = Math.PI;
+        }else if (blue4.value==14) {
+          var blue4val = Math.random();
+        }else{
+          var blue4val = blue4.selectedIndex
+        };
+ 
+        if (blue3.value==1) {
+          var blueval2 = blueval1+blue4val;
+        } else if (blue3.value==2) {
+          var blueval2 = blueval1-blue4val;
+        } else if (blue3.value==3) {
+          var blueval2 = blueval1*blue4val;
+        } else if (blue3.value==4) {
+          var blueval2 = blueval1/blue4val;
+        }else{
+          var blueval = 0;
+        };
+ 
+ 
+        // red
+        var red1 = document.getElementById('red1'),
+            red2 = document.getElementById('red2'),
+            red3 = document.getElementById('red3'),
+            red4 = document.getElementById('red4');
+ 
+        if (red2.value==11) {
+          var red2val = Math.sin(x-length);
+        }else if (red2.value==12) {
+          var red2val = Math.cos(x-length);
+        }else if (red2.value==13) {
+          var red2val = Math.PI;
+        }else if (red2.value==14) {
+          var red2val = Math.random();
+        }else{
+          var red2val = red2.selectedIndex
+        };
+ 
+        if (red1.value==1) {
+          var redval1 = (x-length)+red2val;
+        } else if (red1.value==2) {
+          var redval1 = (x-length)-red2val;
+        } else if (red1.value==3) {
+          var redval1 = (x-length)*red2val;
+        } else if (red1.value==4) {
+          var redval1 = (x-length)/red2val;
+        }else{
+          var redval1 = 0;
+        };
+ 
+        if (red4.value==11) {
+          var red4val = Math.sin(x-length);
+        }else if (red4.value==12) {
+          var red4val = Math.cos(x-length);
+        }else if (red4.value==13) {
+          var red4val = Math.PI;
+        }else if (red4.value==14) {
+          var red4val = Math.random();
+        }else{
+          var red4val = red4.selectedIndex
+        };
+ 
+        if (red3.value==1) {
+          var redval2 = redval1+red4val;
+        } else if (red3.value==2) {
+          var redval2 = redval1-red4val;
+        } else if (red3.value==3) {
+          var redval2 = redval1*red4val;
+        } else if (red3.value==4) {
+          var redval2 = redval1/red4val;
+        }else{
+          var redval = 0;
+        };
+ 
+ 
+        // green
+        var green1 = document.getElementById('green1'),
+            green2 = document.getElementById('green2'),
+            green3 = document.getElementById('green3'),
+            green4 = document.getElementById('green4');
+ 
+        if (green2.value==11) {
+          var green2val = Math.sin(x-length);
+        }else if (green2.value==12) {
+          var green2val = Math.cos(x-length);
+        }else if (green2.value==13) {
+          var green2val = Math.PI;
+        }else if (green2.value==14) {
+          var green2val = Math.random();
+        }else{
+          var green2val = green2.selectedIndex
+        };
+ 
+        if (green1.value==1) {
+          var greenval1 = (x-length)+green2val;
+        } else if (green1.value==2) {
+          var greenval1 = (x-length)-green2val;
+        } else if (green1.value==3) {
+          var greenval1 = (x-length)*green2val;
+        } else if (green1.value==4) {
+          var greenval1 = (x-length)/green2val;
+        }else{
+          var greenval1 = 0;
+        };
+ 
+        if (green4.value==11) {
+          var green4val = Math.sin(x-length);
+        }else if (green4.value==12) {
+          var green4val = Math.cos(x-length);
+        }else if (green4.value==13) {
+          var green4val = Math.PI;
+        }else if (green4.value==14) {
+          var green4val = Math.random();
+        }else{
+          var green4val = green4.selectedIndex
+        };
+ 
+        if (green3.value==1) {
+          var greenval2 = greenval1+green4val;
+        } else if (green3.value==2) {
+          var greenval2 = greenval1-green4val;
+        } else if (green3.value==3) {
+          var greenval2 = greenval1*green4val;
+        } else if (green3.value==4) {
+          var greenval2 = greenval1/green4val;
+        }else{
+          var greenval = 0;
+        };
+ 
+ 
+        chart.push([
+            { time: time, y: blueval2},
+            { time: time, y: redval2},
+            { time: time, y: greenval2}
+        ]);
+        document.getElementById('indexno').innerHTML=x-length;
+        nextIndex++;
+    };
+ 
+    $('#testId button.toggle').click(function(e) {
+        var index = parseInt($(e.target).attr('data-index'));
+        chart.toggleLayer(index);
+    });
+ 
+    $('#testId button.playback').on('click', function(e) {
+        if (playing) {
+            $(e.target).text('Play');
+            clearInterval(interval);
+        }
+        else {
+            $(e.target).text('Pause');
+            interval = setInterval(pushPoint, 1000);
+            pushPoint();
+        }
+        playing = !playing;
+    });
+});
+</script>
+</body>
+</html>

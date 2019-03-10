@@ -5,14 +5,21 @@
   <title>Chat Room</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+
+
 </head>
 
 <body>
 {% block content %}
 {% if user.is_authenticated %}
-    Hi {{ user.username }}!
+    <h2>Hi {{ user.username }}!</h2>
     <p><a href="{% url 'logout' %}">logout</a></p>
 
+    <h2>Chat</h2>
     <textarea readonly id="chat-log" cols="100" rows="20"></textarea><br/>
     <label>Input user name to display -></label>
     <input id="chat-username-input" type-"text" size="30" /><br/>

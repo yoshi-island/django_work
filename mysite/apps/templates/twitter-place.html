@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+
+</head>
+<body>
+
+    <div>
+      <h2>Menu</h2>
+      <p><a href="https://www.yoshiislandserver.net">Back to Basepage</a></p>
+    </div>
+
+ 
+<h2>Twitter IDからよく呟かれている地名を探す</h2>
+ 
+<p>
+<div>
+@<input type="text" value="takapon_jp" id="twtid">
+</div>
+</p>
+ 
+<p>
+<div>
+<button type="button" onclick="loadDoc()">Request data</button>
+</div>
+</p>
+ 
+<p>
+<div>
+<li>1位: <label id="first"></label>
+<li>2位: <label id="second"></label>
+<li>3位: <label id="third"></label>
+<li>4位: <label id="fourth"></label>
+<li>5位: <label id="fifth"></label>
+</div>
+</p>
+ 
+<p>
+tweets:<br>
+<label id="tweets"></label>
+</p>
+ 
+<script>
+ 
+function loadDoc() {
+  var twtid = document.getElementById("twtid") ;
+  var requrl = "https://www.yoshiislandserver.net:3000/getTweetsPlace/@" + twtid.value
+  document.getElementById("first").innerHTML = "";
+  document.getElementById("second").innerHTML = "";
+  document.getElementById("third").innerHTML = "";
+  document.getElementById("fourth").innerHTML = "";
+  document.getElementById("fifth").innerHTML = "";
+  document.getElementById("tweets").innerHTML = "";
+ 
+  $.ajax({
+    url: requrl,
+    type: "GET",
+    success: function(result){
+      console.log(result["data"]["rank"])
+      console.log(result["data"]["src_place_twt"])
+ 
+      if(result["data"]["rank"]["0"]) {
+        document.getElementById("first").innerHTML = result["data"]["rank"]["0"]["place"] + " ( " +
+          result["data"]["rank"]["0"]["count"] + " )";
+      } else {
+        document.getElementById("first").innerHTML = "見つかりません";
+      }
+ 
+      if(result["data"]["rank"]["1"]) {
+        document.getElementById("second").innerHTML = result["data"]["rank"]["1"]["place"] + " ( " +
+          result["data"]["rank"]["1"]["count"] + " )";
+      } else {
+        document.getElementById("second").innerHTML = "見つかりません";
+      }
+ 
+      if(result["data"]["rank"]["2"]) {
+        document.getElementById("third").innerHTML = result["data"]["rank"]["2"]["place"] + " ( " +
+          result["data"]["rank"]["2"]["count"] + " )";
+      } else {
+        document.getElementById("third").innerHTML = "見つかりません";
+      }
+ 
+      if(result["data"]["rank"]["3"]) {
+        document.getElementById("fourth").innerHTML = result["data"]["rank"]["3"]["place"] + " ( " +
+          result["data"]["rank"]["3"]["count"] + " )";
+      } else {
+        document.getElementById("fourth").innerHTML = "見つかりません";
+      }
+ 
+      if(result["data"]["rank"]["4"]) {
+        document.getElementById("fifth").innerHTML = result["data"]["rank"]["4"]["place"] + " ( " +
+          result["data"]["rank"]["4"]["count"] + " )";
+      } else {
+        document.getElementById("fifth").innerHTML = "見つかりません";
+      }
+ 
+      if(result["data"]["src_place_twt"][0]) {
+        document.getElementById("tweets").innerHTML = result["data"]["src_place_twt"];
+      } else {
+        document.getElementById("fifth").innerHTML = "見つかりません";
+      }
+    }
+    })
+ }
+ 
+ 
+</script>
+ 
+</body>
+</html>

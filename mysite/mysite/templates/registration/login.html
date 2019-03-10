@@ -2,10 +2,24 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 </head>
 
 <body>
 {% block content %}
+
+<div class="sidenav">
+  <a href="{% url 'base' %}">base</a>
+  <a href="{% url 'login' %}">login</a>
+  <a href="{% url 'apps' %}">apps</a>
+</div>
+
+<div class="header">
+  Yoshiislandserver
+</div>
+
+<div class="content">
   <h2>Login</h2>
   <form method="post">
     {% csrf_token %}
@@ -13,10 +27,10 @@
     <button type="submit">Login</button>
   </form>
   <br>
-  <p><strong>-- OR --</strong></p>
   <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.GET.next }}">Login with Google</a><br>
   <a href="{% url 'social:begin' 'github' %}?next={{ request.GET.next }}">Login with GitHub</a><br>
   <a href="{% url 'social:begin' 'twitter' %}?next={{ request.GET.next }}">Login with Twitter</a><br>
   <a href="{% url 'social:begin' 'facebook' %}?next={{ request.GET.next }}">Login with Facebook</a>
+</div>
 {% endblock %}
 </body>

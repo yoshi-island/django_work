@@ -62,7 +62,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR), 'mysite/templates', 'chat/templates'],
+        'DIRS': [os.path.join(BASE_DIR), 'mysite/templates', 'chat/templates', 'apps/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -180,4 +180,6 @@ CHANNEL_LAYERS = {
 #SESSION_COOKIE_SECURE = True
 #CSRF_COOKIE_SECURE = True
 
-
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]

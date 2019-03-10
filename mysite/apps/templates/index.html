@@ -1,6 +1,8 @@
 <!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8"/>
+  <title>Apps</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   {% load static %}
@@ -9,7 +11,6 @@
 
 <body>
 {% block content %}
-
 <div class="sidenav">
   <a href="{% url 'base' %}">base</a>
   <a href="{% url 'login' %}">login</a>
@@ -20,7 +21,14 @@
   Yoshiislandserver
 </div>
 <div class="content">
-  <p>This is Basepage!</p>
+  <h2>Apps</h2>
+  <p><a href="{% url 'meeting-timer' %}">meeting-timer</a></p>
+  <p><a href="{% url 'twitter-place' %}">twitter-place</a></p>
+  <p><a href="{% url 'epoch-graph' %}">epoch-graph</a></p>
 </div>
+
 {% endblock %}
+<script>
+</script>
 </body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!--multi device--!>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>TimeKeeper</title>
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+  </head>
+<body>
+    <div>
+      <h2>Menu</h2>
+      <p><a href="https://www.yoshiislandserver.net">Back to Basepage</a></p>
+    </div>
+
+    <h2>Meeting-Timer</h2>
+    <!-- get current time --!>
+    <p>
+    current time is<label id="RealtimeClock"></label>
+    </p>
+    <!-- get end time --!>
+    <p>
+    end time is<input type="text"id="EndTime"  value="18:00" size="10">
+    </p>
+    <!-- get remain time and set buttons --!>
+    <p>
+    <form name="timer">
+    remain time is</br>
+    <input type="text" value="10" size="10">min
+    <input type="text" value="0" size="10">sec<br>
+    <input type="button" value="start" onclick="cntStart()">
+    <input type="button" value="stop" onclick="cntStop()">
+    <input type="button" value="reset" onclick="reSet()">
+    </form>
+    <!-- get aleart message --!>
+    <font color="red"><label id="AlertMessage"></label></font>
+    </p>
+    <!-- get textbox --!>
+    <p>
+    <textarea name="freeans" rows="20" cols="30">Today's Agenda</textarea>
+    </p>
+        <!-- javascript --!>
+        <script type="text/javascript">
+        // display clock
+        function showClock() {
+           var nowTime = new Date();
+           var nowHour = setfig( nowTime.getHours() );
+           var nowMin = setfig( nowTime.getMinutes() );
+           var nowSec = setfig( nowTime.getSeconds() );
+           var msg = nowHour + ":" + nowMin + ":" + nowSec;
+           document.getElementById("RealtimeClock").innerHTML = msg;
+        }
+        setInterval('showClock()',1000);
+        // fix number of digits to two if its one
+        function setfig(num) {
+           var ret;
+           if( num < 10 ) { ret = "0" + num; }
+           else { ret = num; }
+           return ret;
+        }
+        // set timer id
+        var timer1;
+        
+        // get countdown timer for 1000msec
+        function cntStart() {
+          document.timer.elements[2].disabled=true;
+          timer1=setInterval("countDown()",1000);
+        }
+        
+        // stop timer
+        function cntStop() {
+          document.timer.elements[2].disabled=false;
+          clearInterval(timer1);
+        }
+        
+        // countdowm timer
+        function countDown() {
+          var min=document.timer.elements[0].value;
+          var sec=document.timer.elements[1].value;
+          
+          if( (min=="") && (sec=="") ) {
+            var msg="set time!";
+            document.getElementById("AlertMessage").innerHTML = msg;
+            reSet();
+          } else {
+            if (min=="") min=0;
+            min=parseInt(min);
+            
+            if (sec=="") sec=0;
+            sec=parseInt(sec);
+            
+            tmWrite(min*60+sec-1);
+          }
+        }
+        
+        // get remain time
+        function tmWrite(int) {
+          int=parseInt(int);
+          
+          if (int<=0)
+          {
+            reSet();
+            var msg="it's time!";
+            //alert(msg)
+            document.getElementById("AlertMessage").innerHTML = msg;
+            // aleart tab if remain time is zero
+            document.title  = msg
+          } else {
+            // get remain min
+            rem_min=Math.floor(int/60);
+            // get remain sec
+            rem_sec=int % 60;
+            // get remain time
+            document.timer.elements[0].value=rem_min;
+            document.timer.elements[1].value=rem_sec;
+            // display remain time
+            document.title  = 'remain time is ' + rem_min + ':' + rem_sec;
+          }
+        }
+        
+        // reset form
+        function reSet() {
+          var msg="";
+          document.getElementById("AlertMessage").innerHTML = msg;
+          document.timer.elements[0].value="10";
+          document.timer.elements[1].value="0";
+          document.timer.elements[2].disabled=false;
+          clearInterval(timer1);
+        }
+        </script>
+    </body>
+</html>
