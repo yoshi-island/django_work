@@ -8,10 +8,10 @@
 
 </head>
 <body>
-
+{% block content %}
     <div>
       <h2>Menu</h2>
-      <p><a href="https://www.yoshiislandserver.net">Back to Basepage</a></p>
+      <a href="{% url 'apps' %}">Back to Apps</a>
     </div>
 
  
@@ -109,6 +109,7 @@ function loadDoc() {
  
  
 </script>
- 
+
+{% endblock %} 
 </body>
 </html>
