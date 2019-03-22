@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'channels',
     'chat',
     'sslserver',
+    'lists',
 ]
 
 MIDDLEWARE = [
@@ -62,7 +63,13 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR), 'mysite/templates', 'chat/templates', 'apps/templates'],
+        'DIRS': [
+            os.path.join(BASE_DIR),
+            'mysite/templates',
+            'chat/templates',
+            'apps/templates',
+            'lists/templates',
+         ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
